@@ -1,2 +1,2 @@
 # development
-Welcome to Kubernetes development repository!
+Welcome to development environment! 
