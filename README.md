@@ -1,2 +1,2 @@
 # development
-Welcome to development environment! 
+Welcome to the development environment! 
