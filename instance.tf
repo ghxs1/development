@@ -3,8 +3,17 @@ resource "aws_instance" "webserver" {
     instance_type = "t2.micro"
     security_groups = [aws_security_group.example_security_group.name]
     availability_zone = "us-east-2a"
+    vpc_security_group_ids = [ aws_security_group.example_security_group.vpc_id ]
     subnet_id = aws_subnet.example_vpc_subnet.id
     tags = {
       Name = "Apache Web Server"
+    key_name = "" # Need to generate a key pair for SSH access ie. ssh-keygen 
+    user_data = <<-EOF
+                #!/bin/bash
+                yum update -y
+                yum install httpd -y
+                systemctl start httpd
+                systemctl enable httpd
+                EOF
     }
 }
