@@ -14,6 +14,8 @@ resource "aws_instance" "webserver" {
                 yum install httpd -y
                 systemctl start httpd
                 systemctl enable httpd
+                echo "<h1>Welcome to my NEW Apache Web Server by GHOS"</h1>" > /var/www/html/index.html
+                systemctl restart httpd
                 EOF
     }
 }
