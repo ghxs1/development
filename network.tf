@@ -13,7 +13,7 @@ resource "aws_security_group" "example_security_group" {
     description = "Security group for example_vpc"
 }
 
-resource "aws_security_group_ingress_rule" "example_security_group_ingress_http" {
+resource "aws_vpc_security_group_ingress_rule" "example_security_group_ingress_http" {
     security_group_id = "${aws_security_group.example_security_group.id}"
 
     ip_protocol = "tcp"
@@ -22,7 +22,7 @@ resource "aws_security_group_ingress_rule" "example_security_group_ingress_http"
     cidr_ipv4 = "${aws_subnet.example_vpc.cidr_block}"
 }
 
-resource "aws_security_group_ingress_rule" "example_security_group_ingress_ssh" {
+resource "aws_vpc_security_group_ingress_rule" "example_security_group_ingress_ssh" {
     security_group_id = "${aws_security_group.example_security_group.id}"
     
     ip_protocol = "tcp"
