@@ -7,7 +7,7 @@ resource "aws_instance" "webserver" {
     subnet_id = aws_subnet.example_vpc_subnet.id
     tags = {
       Name = "Apache Web Server"
-    key_name = "" # Need to generate a key pair for SSH access ie. ssh-keygen 
+    key_name = "rhel9_webserver" # Need to generate a key pair for SSH access ie. ssh-keygen 
     user_data = <<-EOF
                 #!/bin/bash
                 yum update -y
