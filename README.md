@@ -1,4 +1,3 @@
-# development
-Welcome to the development environment! 
+Welcome to my development environment!
 
-Provisioning an Apache Web Server in AWS using Terraform
+Current project: Provisioning and deploying an AWS EC2 instance running Apache Web Server via Terraform
