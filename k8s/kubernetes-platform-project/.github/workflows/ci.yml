@@ -1,0 +1,27 @@
+name: Kubernetes CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Display Repository Files
+        run: ls -la
+
+      - name: Print Current Directory
+        run: pwd
+
+      - name: Display Date
+        run: date
+
+      - name: Success
+        run: echo "GitHub Actions executed successfully!"
