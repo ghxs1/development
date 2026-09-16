@@ -1,6 +1,6 @@
 resource "aws_instance" "example_server" {
-    ami = "ami-002acc74c401fa86b" # RHEL9 
-    instance_type = "t2.micro"
+    ami = var.aws_ami # RHEL9 
+    instance_type = var.instance_type
     # security_groups = [aws_security_group.example_security_group.name]
     availability_zone = "us-east-2c"
     vpc_security_group_ids = [ aws_security_group.example_security_group.id ]
