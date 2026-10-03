@@ -55,7 +55,7 @@ jobs:
 
       - name: Copy image scanning script
         run: |
-          sudo mkdir -p security/ 
+          sudo mkdir -p /security
           sudo cp security/scan-image.sh /security/scan-image.sh
           sudo chmod +x /security/scan-image.sh
 
