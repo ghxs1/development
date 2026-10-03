@@ -16,9 +16,15 @@ jobs:
       
       - name: Install Semgrep
         run: pip install semgrep
-      
+
+      - name: Copy SAST script
+        run: |
+          sudo mkdir -p /security
+          sudo cp security/run-sast.sh /security/run-sast.sh
+          sudo chmod +x /security/run-sast.sh
+
       - name: Run SAST
-        run: ./security/run-sast.sh
+        run: /security/run-sast.sh
 
   container-security:
     runs-on: ubuntu-latest
@@ -26,6 +32,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Copy Dockerfile
+        run: |
+          sudo mkdir -p /docker
+          sudo cp docker/Dockerfile /docker/Dockerfile
 
       - name: Build Docker image
         run: |
@@ -42,7 +53,13 @@ jobs:
             | sudo gpg --dearmor \
             -o /usr/share/keyrings/trivy.gpg
 
+      - name: Copy image scanning script
+        run: |
+          sudo mkdir -p security/ 
+          sudo cp security/scan-image.sh /security/scan-image.sh
+          sudo chmod +x /security/scan-image.sh
+
       - name: Scan container image
         run: |
-          ./security/scan-image.sh \
+          /security/scan-image.sh \
             myapp:${{ github.sha }}
