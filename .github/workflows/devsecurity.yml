@@ -1,0 +1,48 @@
+name: Security Scanning Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Install Semgrep
+        run: pip install semgrep
+      
+      - name: Run SAST
+        run: ./security/run-sast.sh
+
+  container-security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            -f /docker/Dockerfile \
+            -t myapp:${{ github.sha }} \
+            .
+
+      - name: Install Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -qO- https://aquasecurity.github.io/trivy-repo/deb/public.key \
+            | sudo gpg --dearmor \
+            -o /usr/share/keyrings/trivy.gpg
+
+      - name: Scan container image
+        run: |
+          ./security/scan-image.sh \
+            myapp:${{ github.sha }}
