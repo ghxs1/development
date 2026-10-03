@@ -14,7 +14,7 @@ echo "Running Trivy scan on ... $IMAGE "
 
 trivy image \
   --severity HIGH,CRITICAL \
-  --exit-code 1 \ 
+  --exit-code 1 \
   "$IMAGE"
 
 echo "Container vulnerability scan passed."
